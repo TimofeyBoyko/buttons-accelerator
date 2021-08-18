@@ -1,23 +1,30 @@
-import logo from './logo.svg';
+import React from 'react';
+
+import { Button } from './Button';
 import './App.css';
 
+const buttons = [1, 2, 3];
+
 function App() {
+  const [buttonsVisible, setButtonsVisible] = React.useState(false);
+  const [buttonValue, setButtonValue] = React.useState(1);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="container">
+      <button className="main-button" onClick={() => setButtonsVisible((prev) => !prev)}>
+        {buttonValue}
+      </button>
+      {buttonsVisible && (
+        <div className="buttons-container">
+          {buttons.map((button, index) => (
+            <Button
+              key={`${button}_${index}`}
+              value={button}
+              onClick={() => setButtonValue(button)}
+            />
+          ))}
+        </div>
+      )}
     </div>
   );
 }
